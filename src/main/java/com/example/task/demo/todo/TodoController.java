@@ -38,7 +38,7 @@ public class TodoController {
     public Todo editTodo(@PathVariable long id, @RequestBody Todo todo){
          Todo existingTodo = new Todo();
          try{
-             existingTodo = todoRepository.findById(id).orElseThrow();
+             existingTodo = todoRepository.findById(id).get();
              existingTodo.setDescription(todo.getDescription());
              existingTodo.setComplete(todo.isComplete());
              existingTodo.setTitle(todo.getTitle());
