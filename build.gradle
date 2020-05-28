@@ -8,13 +8,13 @@ plugins {
 flyway {
     url = 'jdbc:postgresql://localhost:5432/woz_u_blog'
     user = 'postgres'
-    password = ''
+    password = 'password123'
     outOfOrder = true
 }
 
 group = 'com.example.task'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '14'
+sourceCompatibility = '1.8'
 
 configurations {
     compileOnly {
