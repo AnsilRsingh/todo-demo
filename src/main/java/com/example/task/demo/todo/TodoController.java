@@ -36,7 +36,7 @@ public class TodoController {
         todoRepository.save(todo);
         return todo;
     }
-    @PutMapping
+    @PutMapping("/id")
     public Todo editTodo(@PathVariable long id, @RequestBody Todo todo){
          Todo existingTodo = new Todo();
          try{
