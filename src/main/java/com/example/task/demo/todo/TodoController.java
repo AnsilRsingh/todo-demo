@@ -16,43 +16,45 @@ public class TodoController {
 
     private TodoRepository todoRepository;
 
-    public  TodoController(TodoRepository todoRepository){
+    public TodoController(TodoRepository todoRepository) {
         this.todoRepository = todoRepository;
     }
 
     @GetMapping("/{id}")
-    public Optional<Todo> getTodo(@PathVariable long id){
-        return  todoRepository.findById(id);
+    public Optional<Todo> getTodo(@PathVariable long id) {
+        return todoRepository.findById(id);
     }
 
 
     @GetMapping
-    public List<Todo> getTodos(){
+    public List<Todo> getTodos() {
         return todoRepository.findAll();
     }
 
     @PostMapping
-    public Todo addTodo(@RequestBody Todo todo){
+    public Todo addTodo(@RequestBody Todo todo) {
         todoRepository.save(todo);
         return todo;
     }
-    @PutMapping("/id")
-    public Todo editTodo(@PathVariable long id, @RequestBody Todo todo){
-         Todo existingTodo = new Todo();
-         try{
-             existingTodo = todoRepository.findById(id).get();
-             existingTodo.setDescription(todo.getDescription());
-             existingTodo.setComplete(todo.isComplete());
-             existingTodo.setTitle(todo.getTitle());
-             todoRepository.save(existingTodo);
-         }catch (NoSuchElementException e) {
-             System.out.println(e.getMessage());
-             existingTodo = todoRepository.save(todo);
-         }
-         return existingTodo;
+
+    @PutMapping("/{id}")
+    public Todo editTodo(@PathVariable long id, @RequestBody Todo todo) {
+        Todo existingTodo = new Todo();
+        try {
+            existingTodo = todoRepository.findById(id).get();
+            existingTodo.setTitle(todo.getTitle());
+            existingTodo.setDescription(todo.getDescription());
+            existingTodo.setComplete(todo.isComplete());
+            todoRepository.save(existingTodo);
+        } catch (NoSuchElementException e) {
+            System.out.println(e.getMessage());
+            existingTodo = todoRepository.save(todo);
+        }
+        return existingTodo;
     }
-    @DeleteMapping("/id")
-    public void deleteTodo(@PathVariable long id){
+
+    @DeleteMapping("/{id}")
+    public void deleteTodo(@PathVariable long id) {
         todoRepository.deleteById(id);
     }
 }
