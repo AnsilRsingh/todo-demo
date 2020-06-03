@@ -36,7 +36,7 @@ public class TodoController {
         todoRepository.save(todo);
         return todo;
     }
-    @PutMapping("/id")
+    @PutMapping("/{id}")
     public Todo editTodo(@PathVariable long id, @RequestBody Todo todo){
          Todo existingTodo = new Todo();
          try{
@@ -51,7 +51,7 @@ public class TodoController {
          }
          return existingTodo;
     }
-    @DeleteMapping("/id")
+    @DeleteMapping("/{id}")
     public void deleteTodo(@PathVariable long id){
         todoRepository.deleteById(id);
     }
